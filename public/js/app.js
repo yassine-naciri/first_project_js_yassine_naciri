@@ -131,7 +131,10 @@ function Loan() {
 
 
 function Invest() {
-    
+    let cal = 1000 * 120 / 100
+    alert(cal)
+    Home_PageList()
+
     
 }
 function login() {
