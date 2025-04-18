@@ -47,8 +47,9 @@ function signup() {
     user_["age"] = user_age
     user_["password"] = user_password
     user_["repassword"] = user_repassword 
-    //user_["money"] = Math.floor(Math.random() * (1000 - 300)) + 300;
-    user_["money"] = 1000;
+    //user_["money"] = Math.floor(Math.random() * (1000 - 300)) + 300
+    user_["money"] = 1000
+    user_["loan"] = false
 
 
 
@@ -119,13 +120,24 @@ function Withdraw() {
 
 function Loan() {
 
-    // 100 x 20% // 100
-    let cal = 1000 * 20 / 100
-    let lose = 1000 * 10 / 100
-    user_.money -= lose
 
-    alert(cal+" "+lose) 
-    Home_PageList()
+
+    // 100 x 20% // 100
+    let check = confirm("Are You sure ")
+
+    if (check)
+    {
+        user_.loan = true
+        let loan = user_.money * 20 / 100
+        user_.money += loan
+        alert("You receive "+ loan) 
+    
+        //let lose = 1000 * 10 / 100
+
+        Home_PageList()
+    }
+    else(Home_PageList)
+
     
 }
 
@@ -138,6 +150,8 @@ function Invest() {
     
 }
 function login() {
+
+
     let user_email = prompt("Email")
     let user_password = prompt("Password") 
     console.log("here-----------")
@@ -149,7 +163,21 @@ function login() {
     if(user_email == user_.email && user_password == user_.password)
     {
         alert("Login Successfully...")
+
+        alert("Checking the loan")
+        if (user_.loan == true)
+        {
+            let lose = user_.money * 10 / 100 
+            user_.money -= lose
+            alert("You lose " + lose )
+            HomePage()
+        }
+        else{alert("There No loan")
+            HomePage()
+        }
         HomePage()
+
+
     }else{
         alert("Wrong Email / Password")
         Welcome_Message()
