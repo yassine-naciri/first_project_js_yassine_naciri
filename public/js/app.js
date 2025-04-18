@@ -83,8 +83,8 @@ function Histories() {
 
 function deposit() {
 
-    let msg = prompt("How Much You Wanna Deposit To Your Money ")
-    if (msg <= 1000 && user_.money <= msg)
+    let msg = parseInt(prompt("How Much You Wanna Deposit To Your Money "))
+    if (msg <= user_.money && msg <= 1000)
     {
         user_.money += msg
         log.push("You Deposit " + msg) 
@@ -100,8 +100,8 @@ function deposit() {
 
 function Withdraw() {
     let msg = prompt("Enter How much Money You wanna Withdraw From Your Money ")
-    alert(msg+user_.money)
-    if(msg <= user_.money)
+
+    if(msg <= user_.money && user_.money >= msg)
     {
         user_.money -= msg
         alert("- you withdraw " + msg+ " from your account \n\n- now you have " + user_.money + " in your money" )
@@ -117,7 +117,23 @@ function Withdraw() {
 
 }
 
+function Loan() {
 
+    // 100 x 20% // 100
+    let cal = 1000 * 20 / 100
+    let lose = 1000 * 10 / 100
+    user_.money -= lose
+
+    alert(cal+" "+lose) 
+    Home_PageList()
+    
+}
+
+
+function Invest() {
+    
+    
+}
 function login() {
     let user_email = prompt("Email")
     let user_password = prompt("Password") 
@@ -183,14 +199,14 @@ function Home_PageList() {
     else if (welcome_prompt == 4)
     {
         welcome_prompt = "Take a Loan"
-        Pass_change()
+        Loan()
 
     }
 
     else if (welcome_prompt == 5)
         {
             welcome_prompt = "Invest"
-            Pass_change()
+            Invest()
     
         }
 
