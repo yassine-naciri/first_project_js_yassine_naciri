@@ -35,9 +35,47 @@ function HomePage() {
 
 
 function signup() {
-    let user_name = prompt("UserName")
+
+
+
+
+
+
+
+
+    let user_name = prompt("Full Name")
+
+    let filter_spaces = user_name.trim() 
+    let only_az= user_name.match(/^[A-Za-z\s]+$/)
+
+    if(user_name == " " || filter_spaces.length < 5 || !only_az)
+{
+    alert("You can only use letters name should be more than 5 characters ")
+    Welcome_Message()
+}
+
+
     let user_email = prompt("User Email")
+
+    user_email.trim()
+    let email_at = user_email.includes("@")
+    let email_dot = user_email.endsWith(".com")
+
+
+
+    if(user_email.length > 10 || !email_at || !email_dot){
+        alert("Your Email Should be less than 10 characters and without spaces")
+        Welcome_Message()
+    }
+    else{console.log("")}
     let user_age = prompt("User Age")
+    if (!user_age.match(/^[0-9]{1,2}$/) || user_age.length > 3)
+    {
+        alert("Age Should be less than 3 digts")
+        Welcome_Message()
+    }
+
+
     let user_password = prompt("User Password")
     let user_repassword = prompt("Repassword") 
     
@@ -133,7 +171,7 @@ function Loan() {
         alert("You receive "+ loan) 
     
         //let lose = 1000 * 10 / 100
-
+        log.push("You used loan option and You received "+ loan)
         Home_PageList()
     }
     else(Home_PageList)
@@ -165,6 +203,14 @@ function login() {
         alert("Login Successfully...")
 
         alert("Checking the loan")
+        let lose_log = user_.money * 20 / 100
+        alert(lose_log +  " hhhh")
+        if(lose_log === 0)
+        {
+            user_.loan = false
+
+        }
+        else{console.log("hiiiiiii")}        
         if (user_.loan == true)
         {
             let lose = user_.money * 10 / 100 
@@ -189,11 +235,44 @@ function login() {
 
 function Pass_change() {
     let get_user = prompt("Please Enter Your Email")
+
+
     if (user_.email == get_user)
     {
-        new_pass = prompt("Enter Your New Password")
+        let new_pass = prompt("Enter Your New Password")
+
+        //user_.password = new_pass
+        new_pass = new_pass.trim()
+
+        if (new_pass.length < 7){
+            alert("Your Password Should be more than 7 characters")
+            Welcome_Message() 
+        }
+
+        let check_space = new_pass.includes(" ") 
+        if(check_space)
+        {
+            alert("Wrong , There is spaces in your password")
+            Welcome_Message()
+        }
+
+
+        let special_chars = ["@", "#", "-", "+", "*", "/"];
+        let check_me = false
+        special_chars.forEach(sc => {
+            if (new_pass.includes(sc)){
+                check_me = true
+            }
+            
+        });
+
+        if(!check_me){
+            alert("Your Password Should contain one of these character @, #, -, +, *, /")
+            Welcome_Message()
+        }
 
         user_.password = new_pass
+
         alert("Password Updated , Try To Login Again")
         Welcome_Message()
     }
