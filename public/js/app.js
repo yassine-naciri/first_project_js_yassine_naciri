@@ -60,8 +60,7 @@ function signup() {
     user_email.trim()
     let email_at = user_email.includes("@")
     let email_dot = user_email.endsWith(".com")
-
-
+    
 
     if(user_email.length > 10 || !email_at || !email_dot){
         alert("Your Email Should be less than 10 characters and without spaces")
@@ -77,6 +76,42 @@ function signup() {
 
 
     let user_password = prompt("User Password")
+    user_password = user_password.trim()
+
+    if (user_password.length < 7){
+        alert("Your Password Should be more than 7 characters")
+        Welcome_Message() 
+    }
+
+    let check_space = user_password.includes(" ") 
+    if(check_space)
+    {
+        alert("Wrong , There is spaces in your password")
+        Welcome_Message()
+    }
+
+
+    let special_chars = ["@", "#", "-", "+", "*", "/"];
+    let check_me = false
+    special_chars.forEach(sc => {
+        if (user_password.includes(sc)){
+            check_me = true
+        }
+        
+    });
+
+    if(!check_me){
+        alert("Your Password Should contain one of these character @, #, -, +, *, /")
+        Welcome_Message()
+    }
+
+    user_.password = user_password
+
+    alert("Password Updated , Try To Login Again")
+    Welcome_Message()
+
+
+
     let user_repassword = prompt("Repassword") 
     
     
