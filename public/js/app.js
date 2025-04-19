@@ -38,11 +38,6 @@ function signup() {
 
 
 
-
-
-
-
-
     let user_name = prompt("Full Name")
 
     let filter_spaces = user_name.trim() 
@@ -105,24 +100,25 @@ function signup() {
         Welcome_Message()
     }
 
-    user_.password = user_password
-
-    alert("Password Updated , Try To Login Again")
-    Welcome_Message()
-
-
-
-    let user_repassword = prompt("Repassword") 
+    let user_repassword = prompt("Re enter password") 
     
+    if (user_repassword != user_password)
+    {
+        alert("You didnt re enter the same password")
+        
+        Welcome_Message()
+
+    }
     
     user_["name"] = user_name
     user_["email"] = user_email
     user_["age"] = user_age
     user_["password"] = user_password
-    user_["repassword"] = user_repassword 
+    //user_["repassword"] = user_repassword 
     //user_["money"] = Math.floor(Math.random() * (1000 - 300)) + 300
     user_["money"] = 1000
     user_["loan"] = false
+    user_["invest"] = false
 
 
 
@@ -201,7 +197,7 @@ function Loan() {
     if (check)
     {
         user_.loan = true
-        let loan = user_.money * 20 / 100
+        let loan = user_.money * 20 / 100 
         user_.money += loan
         alert("You receive "+ loan) 
     
@@ -216,8 +212,14 @@ function Loan() {
 
 
 function Invest() {
-    let cal = 1000 * 120 / 100
-    alert(cal)
+    //let max = 1000 * 120 / 100
+
+    let Invest_money = parseInt(prompt("How much money u wanna invest "))
+    user_.money -= Invest_money
+    alert("You Invested "+Invest_money)
+    log.push("You Invested "+Invest_money)
+    user_.invest = true
+
     Home_PageList()
 
     
@@ -237,23 +239,38 @@ function login() {
     {
         alert("Login Successfully...")
 
-        alert("Checking the loan")
+        console.log("Checking the loan")
         let lose_log = user_.money * 20 / 100
-        alert(lose_log +  " hhhh")
+        //let invest_gen = user_.money * 20 / 100
+        //alert(lose_log +  " test")
         if(lose_log === 0)
         {
             user_.loan = false
 
         }
-        else{console.log("hiiiiiii")}        
+        else{console.log(" ")} 
+        
+        if (user_.invest == true)
+            {
+                let invest = user_.money * 20 / 100 
+                user_.money += invest
+                //alert("You Gen " + lose + "of Investment" )
+                log.push("You Gen " + invest + "of Investment")
+
+
+            }
+            else{console.log("There No invest")
+
+            }
         if (user_.loan == true)
         {
             let lose = user_.money * 10 / 100 
             user_.money -= lose
-            alert("You lose " + lose )
+            //alert("You lose " + lose +" for loan")
+            log.push("You lose " + lose +" for loan")
             HomePage()
         }
-        else{alert("There No loan")
+        else{console.log("There No loan")
             HomePage()
         }
         HomePage()
